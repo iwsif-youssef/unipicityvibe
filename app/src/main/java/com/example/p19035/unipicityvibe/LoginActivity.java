@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignUpActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText emailET;
     EditText passwordET;
@@ -24,7 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -32,24 +32,27 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         auth = FirebaseAuth.getInstance();
-        emailET = findViewById(R.id.emailEditText1);
-        passwordET = findViewById(R.id.passwordEditText1);
+        emailET = findViewById(R.id.emailEditText2);
+        passwordET = findViewById(R.id.passwordEditText2);
 
-        findViewById(R.id.SignUpButton).setOnClickListener(v -> {
-            String email = emailET.getText().toString();
-            String pass = passwordET.getText().toString();
-
-            auth.createUserWithEmailAndPassword(email, pass)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            startActivity(new Intent(this, MainActivity.class));
-                            finish();
-                        } else {
-                            Toast.makeText(this,
-                                    task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        findViewById(R.id.LoginButton2).setOnClickListener(v -> {
+            auth.signInWithEmailAndPassword(
+                    emailET.getText().toString(),
+                    passwordET.getText().toString()
+            ).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(this,
+                            "Login failed",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         });
+
+        findViewById(R.id.signUpTextView1).setOnClickListener(v ->
+                startActivity(new Intent(this, SignUpActivity.class))
+        );
     }
 }

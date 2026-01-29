@@ -8,7 +8,7 @@
     tools:context=".SignUpActivity">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/SignUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteY="376dp" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/nameEditText"
         android:layout_width="214dp"
         android:layout_height="63dp"
         android:layout_marginTop="80dp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress2"
+        android:id="@+id/emailEditText1"
         android:layout_width="216dp"
         android:layout_height="64dp"
         android:layout_marginTop="164dp"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/passwordEditText1"
         android:layout_width="216dp"
         android:layout_height="59dp"
         android:layout_marginTop="252dp"
