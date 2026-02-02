@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnipiCityVibe">
         <activity
+            android:name=".EventDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EventsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EventItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity

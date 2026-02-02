@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                     passwordET.getText().toString()
             ).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    startActivity(new Intent(this, MainActivity.class));
+                    startActivity(new Intent(this, EventsActivity.class));
                     finish();
                 } else {
                     Toast.makeText(this,
