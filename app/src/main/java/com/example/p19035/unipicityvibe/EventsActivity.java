@@ -11,7 +11,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.p19035.unipicityvibe.R;
 import adapters.EventListAdapter;
 import models.Event;
 import com.google.firebase.firestore.DocumentSnapshot;

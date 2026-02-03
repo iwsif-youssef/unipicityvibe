@@ -1,5 +1,6 @@
 package com.example.p19035.unipicityvibe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -52,10 +53,12 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         loadEventDetails(eventId);
 
-        bookBtn.setOnClickListener(v ->
-                Toast.makeText(this,
-                        "Η κράτηση θα υλοποιηθεί στο επόμενο βήμα",
-                        Toast.LENGTH_SHORT).show());
+        bookBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, BookEventActivity.class);
+            intent.putExtra("EVENT_ID", eventId);
+            startActivity(intent);
+        });
+
     }
 
     private void loadEventDetails(String eventId) {
