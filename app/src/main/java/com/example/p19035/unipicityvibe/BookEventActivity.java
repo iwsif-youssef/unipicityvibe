@@ -71,12 +71,36 @@ public class BookEventActivity extends AppCompatActivity {
     private void completeBooking() {
 
         String username = usernameEditText.getText().toString().trim();
-        String email = emailEditText.getText().toString().trim();
 
-        if (username.isEmpty() || email.isEmpty()) {
-            Toast.makeText(this, "Συμπλήρωσε όλα τα πεδία", Toast.LENGTH_SHORT).show();
+        if (username.isEmpty()) {
+            Toast.makeText(this, "Συμπλήρωσε ονοματεπώνυμο", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // 🔍 ΕΛΕΓΧΟΣ ΔΙΠΛΗΣ ΚΡΑΤΗΣΗΣ
+        db.collection("bookings")
+                .whereEqualTo("email", userEmail)
+                .whereEqualTo("eventId", eventId)
+                .get()
+                .addOnSuccessListener(query -> {
+
+                    if (!query.isEmpty()) {
+
+                        Toast.makeText(this,
+                                "Έχεις ήδη κάνει κράτηση για αυτή την εκδήλωση",
+                                Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    saveBooking(username);
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this,
+                                "Σφάλμα ελέγχου κράτησης",
+                                Toast.LENGTH_LONG).show());
+    }
+
+    private void saveBooking(String username) {
 
         Map<String, Object> booking = new HashMap<>();
         booking.put("username", username);
@@ -97,4 +121,6 @@ public class BookEventActivity extends AppCompatActivity {
                                 "Σφάλμα κράτησης",
                                 Toast.LENGTH_LONG).show());
     }
+
+
 }

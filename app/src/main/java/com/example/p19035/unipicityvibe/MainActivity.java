@@ -2,8 +2,9 @@ package com.example.p19035.unipicityvibe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +12,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
+
+    FirebaseAuth auth;
+
+    Button myBookingsButton;
+    Button logoutButton;
+
+    Button loginButton;
+    Button registerButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,17 +35,64 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button loginButton = findViewById(R.id.mainLoginButton);
+        auth = FirebaseAuth.getInstance();
+        myBookingsButton = findViewById(R.id.mainMyBookingsButton);
+        logoutButton = findViewById(R.id.mainLogoutButton);
+
+        loginButton = findViewById(R.id.mainLoginButton);
         loginButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         });
 
-        Button registerButton = findViewById(R.id.mainRegisterButton);
+        registerButton = findViewById(R.id.mainRegisterButton);
         registerButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+            Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
         });
+
+        Button bookingsButton = findViewById(R.id.mainMyBookingsButton);
+        bookingsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MyBookingsActivity.class);
+            startActivity(intent);
+        });
+
+        logoutButton.setOnClickListener(v -> {
+
+            FirebaseAuth.getInstance().signOut();
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+
+            finish();
+        });
+
+
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        myBookingsButton = findViewById(R.id.mainMyBookingsButton);
+        logoutButton = findViewById(R.id.mainLogoutButton);
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        if (auth.getCurrentUser() == null) {
+            myBookingsButton.setVisibility(View.GONE);
+            logoutButton.setVisibility(View.GONE);
+
+            loginButton.setVisibility(View.VISIBLE);
+            registerButton.setVisibility(View.VISIBLE);
+        } else {
+            myBookingsButton.setVisibility(View.VISIBLE);
+            logoutButton.setVisibility(View.VISIBLE);
+
+            loginButton.setVisibility(View.GONE);
+            registerButton.setVisibility(View.GONE);
+        }
+    }
+
 }
