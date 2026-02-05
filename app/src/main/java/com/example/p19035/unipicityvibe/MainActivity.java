@@ -1,6 +1,7 @@
 package com.example.p19035.unipicityvibe;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -20,12 +22,26 @@ public class MainActivity extends AppCompatActivity {
 
     Button myBookingsButton;
     Button logoutButton;
+    Button viewEventsButton;
 
     Button loginButton;
     Button registerButton;
 
+    Button settingsButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        int theme = prefs.getInt("theme", 0);
+
+        if (theme == 1) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -51,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        viewEventsButton = findViewById(R.id.mainViewEvents);
+        viewEventsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, EventsActivity.class);
+            startActivity(intent);
+        });
+
         Button bookingsButton = findViewById(R.id.mainMyBookingsButton);
         bookingsButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MyBookingsActivity.class);
@@ -68,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
+        settingsButton = findViewById(R.id.mainSettingsButton);
+
+        settingsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
 
 
     }
@@ -77,18 +105,23 @@ public class MainActivity extends AppCompatActivity {
 
         myBookingsButton = findViewById(R.id.mainMyBookingsButton);
         logoutButton = findViewById(R.id.mainLogoutButton);
+        viewEventsButton = findViewById(R.id.mainViewEvents);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() == null) {
             myBookingsButton.setVisibility(View.GONE);
             logoutButton.setVisibility(View.GONE);
+            viewEventsButton.setVisibility(View.GONE);
+
 
             loginButton.setVisibility(View.VISIBLE);
             registerButton.setVisibility(View.VISIBLE);
         } else {
             myBookingsButton.setVisibility(View.VISIBLE);
             logoutButton.setVisibility(View.VISIBLE);
+            viewEventsButton.setVisibility(View.VISIBLE);
+
 
             loginButton.setVisibility(View.GONE);
             registerButton.setVisibility(View.GONE);
