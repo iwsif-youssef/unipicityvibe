@@ -35,6 +35,8 @@ public class EventDetailsActivity extends AppCompatActivity {
             return insets;
         });
 
+
+
         titleTv = findViewById(R.id.titleTv2);
         dateTv = findViewById(R.id.dateTv2);
         priceTv = findViewById(R.id.priceTv2);
@@ -46,7 +48,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         String eventId = getIntent().getStringExtra("EVENT_ID");
 
         if (eventId == null) {
-            Toast.makeText(this, "Σφάλμα φόρτωσης", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
