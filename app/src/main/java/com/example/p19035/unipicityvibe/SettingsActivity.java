@@ -19,8 +19,9 @@ public class SettingsActivity extends AppCompatActivity {
     EditText emailEditText;
     Spinner themeSpinner, fontSpinner;
     Button saveButton;
+    Switch geoSwitch;
 
-    SharedPreferences prefs;
+    SharedPreferences settingsPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +38,20 @@ public class SettingsActivity extends AppCompatActivity {
         themeSpinner = findViewById(R.id.settingsThemeSpinner);
         fontSpinner = findViewById(R.id.settingsFontSpinner);
         saveButton = findViewById(R.id.settingsSaveButton);
+        geoSwitch = findViewById(R.id.geolocationSwitch);
 
-        prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        SharedPreferences userPrefs =
+                getSharedPreferences("user", MODE_PRIVATE);
+
+        boolean loggedIn = userPrefs.getBoolean("logged_in", false);
+
+
+        settingsPrefs = getSharedPreferences("settings", MODE_PRIVATE);
 
         setupSpinners();
         loadSettings();
         loadUserEmail();
+
 
         saveButton.setOnClickListener(v ->{
             saveSettings();
@@ -53,6 +62,25 @@ public class SettingsActivity extends AppCompatActivity {
 
             finish();
         });
+
+
+        boolean enabled = settingsPrefs.getBoolean("notifications_enabled", true);
+
+        if (!loggedIn) {
+            geoSwitch.setChecked(false);
+            geoSwitch.setEnabled(false);
+        } else {
+            geoSwitch.setChecked(enabled);
+            geoSwitch.setEnabled(true);
+
+            geoSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                settingsPrefs.edit()
+                        .putBoolean("notifications_enabled", isChecked)
+                        .apply();
+            });
+        }
+
+
     }
 
     private void setupSpinners() {
@@ -75,8 +103,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void loadSettings() {
-        themeSpinner.setSelection(prefs.getInt("theme", 0));
-        fontSpinner.setSelection(prefs.getInt("font", 1));
+        themeSpinner.setSelection(settingsPrefs.getInt("theme", 0));
+        fontSpinner.setSelection(settingsPrefs.getInt("font", 1));
     }
 
     private void loadUserEmail() {
@@ -88,7 +116,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void saveSettings() {
 
-        prefs.edit()
+        settingsPrefs.edit()
                 .putInt("theme", themeSpinner.getSelectedItemPosition())
                 .putInt("font", fontSpinner.getSelectedItemPosition())
                 .apply();

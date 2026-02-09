@@ -1,6 +1,7 @@
 package com.example.p19035.unipicityvibe;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,6 +42,14 @@ public class LoginActivity extends AppCompatActivity {
                     passwordET.getText().toString()
             ).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
+
+                    SharedPreferences prefs =
+                            getSharedPreferences("user", MODE_PRIVATE);
+
+                    prefs.edit()
+                            .putBoolean("logged_in", true)
+                            .putString("email", emailET.getText().toString())
+                            .apply();
 
                     startActivity(new Intent(this, MainActivity.class));
                     finish();

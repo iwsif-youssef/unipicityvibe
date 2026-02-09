@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
-        int theme = prefs.getInt("theme", 0);
+        SharedPreferences settingsPrefs = getSharedPreferences("settings", MODE_PRIVATE);
+        int theme = settingsPrefs.getInt("theme", 0);
 
         if (theme == 1) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -121,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         logoutButton.setOnClickListener(v -> {
+
+            SharedPreferences userPrefs = getSharedPreferences("user", MODE_PRIVATE);
+
+            userPrefs.edit().clear().apply();
 
             FirebaseAuth.getInstance().signOut();
 
@@ -180,9 +184,8 @@ public class MainActivity extends AppCompatActivity {
             getUserLocation();
 
         }
-        if (requestCode == 1001 &&
-                grantResults.length > 0 &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == 1001 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            getUserLocation();
         }
     }
 
@@ -258,6 +261,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkNearbyEvents(double userLat, double userLon) {
 
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            return;
+        }
+
+
+        SharedPreferences settingsPrefs =
+                getSharedPreferences("settings", MODE_PRIVATE);
+
+        if (!settingsPrefs.getBoolean("notifications_enabled", true)) {
+            return;
+        }
+
         for (Event event : eventList) {
 
             float distance = distanceInMeters(
@@ -271,6 +287,8 @@ public class MainActivity extends AppCompatActivity {
                 showEventNotification(event, distance);
             }
         }
+
+
     }
 /*
     private void requestNotificationPermission() {
@@ -347,9 +365,7 @@ public class MainActivity extends AppCompatActivity {
                 new NotificationCompat.Builder(this, CHANNEL_ID)
                         .setSmallIcon(R.drawable.ic_launcher_foreground)
                         .setContentTitle("Κοντινή Εκδήλωση")
-                        .setContentText(
-                                event.getTitle() + " (" + (int) distance + "m)"
-                        )
+                        .setContentText(event.getTitle() + " (" + (int) distance + "m)")
                         .setContentIntent(pendingIntent)
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_HIGH)

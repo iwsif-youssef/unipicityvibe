@@ -56,6 +56,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsThemeSpinner" />
 
+    <TextView
+        android:id="@+id/geolocationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Geolocation"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.002"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsFontSpinner" />
+
+    <Switch
+        android:id="@+id/geolocationSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.003"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/geolocationTextView" />
+
     <EditText
         android:id="@+id/settingsEmailEditText"
         android:layout_width="wrap_content"
@@ -92,7 +115,7 @@
         android:id="@+id/settingsSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="124dp"
         android:text="Save"
         app:layout_constraintTop_toBottomOf="@+id/settingsFontSpinner"
         tools:layout_editor_absoluteX="161dp" />
