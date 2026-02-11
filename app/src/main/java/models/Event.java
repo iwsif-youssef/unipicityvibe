@@ -1,7 +1,5 @@
 package models;
 
-import androidx.collection.LongIntMap;
-
 public class Event {
 
     private String id;
@@ -9,8 +7,8 @@ public class Event {
     private String dateTime;
     private double price;
     private String description;
-    private double latitude;
-    private double longitude;
+    private double coordinateY;
+    private double coordinateX;
 
     public Event() {}
 
@@ -20,8 +18,8 @@ public class Event {
     public String getDateTime() { return dateTime; }
     public double getPrice() { return price; }
     public String getDescription() { return description; }
-    public double getLatitude() { return latitude; }
-    public double getLongitude() { return longitude; }
+    public double getCoordinateY() { return coordinateY; }
+    public double getCoordinateX() { return coordinateX; }
 
     //Setters
     public void setId(String id) { this.id = id; }
