@@ -40,18 +40,13 @@ public class SettingsActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.settingsSaveButton);
         geoSwitch = findViewById(R.id.geolocationSwitch);
 
-        SharedPreferences userPrefs =
-                getSharedPreferences("user", MODE_PRIVATE);
-
-        boolean loggedIn = userPrefs.getBoolean("logged_in", false);
-
+        SharedPreferences userPrefs = getSharedPreferences("user", MODE_PRIVATE);
 
         settingsPrefs = getSharedPreferences("settings", MODE_PRIVATE);
 
         setupSpinners();
         loadSettings();
         loadUserEmail();
-
 
         saveButton.setOnClickListener(v ->{
             saveSettings();
@@ -63,6 +58,8 @@ public class SettingsActivity extends AppCompatActivity {
             finish();
         });
 
+
+        boolean loggedIn = FirebaseAuth.getInstance().getCurrentUser() != null;
 
         boolean enabled = settingsPrefs.getBoolean("notifications_enabled", true);
 

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Geolocation AND Notifications
     FusedLocationProviderClient fusedLocationClient;
-    private static final float RADIUS_METERS = 200f;
+    private static final float RADIUS_METERS = 5000f;
     private static final int LOCATION_PERMISSION_REQUEST = 1001;
     private static final int NOTIFICATION_PERMISSION_REQUEST = 2001;
     List<Event> eventList = new ArrayList<>();
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         loadEvents();
         createNotificationChannel();
+        requestNotificationPermission();
 
         auth = FirebaseAuth.getInstance();
         myBookingsButton = findViewById(R.id.mainMyBookingsButton);
@@ -180,13 +181,16 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == LOCATION_PERMISSION_REQUEST && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
             getUserLocation();
-
+        }
+        if (requestCode == NOTIFICATION_PERMISSION_REQUEST && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            getUserLocation();
         }
         if (requestCode == 1001 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             getUserLocation();
         }
+
+
     }
 
     private void loadEvents() {
@@ -230,19 +234,20 @@ public class MainActivity extends AppCompatActivity {
         try {
             fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
 
-                        if (location != null) {
+                if (location != null) {
 
-                            double lat = location.getLatitude();
-                            double lon = location.getLongitude();
+                    double lat = location.getLatitude();
+                    double lon = location.getLongitude();
 
-                            checkNearbyEvents(lat, lon);
-                        }
-                    });
+                    checkNearbyEvents(lat, lon);
+                }
+            });
 
         } catch (SecurityException e) {
             e.printStackTrace();
         }
     }
+
 
 
 
@@ -263,14 +268,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Toast.makeText(this, "User NULL", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            Toast.makeText(this, "User OK", Toast.LENGTH_LONG).show();
+        }
+
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             return;
         }
 
 
-        SharedPreferences settingsPrefs =
-                getSharedPreferences("settings", MODE_PRIVATE);
+        SharedPreferences settingsPrefs = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean enabled = settingsPrefs.getBoolean("notifications_enabled", true);
 
-        if (!settingsPrefs.getBoolean("notifications_enabled", true)) {
+        Toast.makeText(this, "Notifications enabled: " + enabled, Toast.LENGTH_LONG).show();
+
+        if (!enabled) {
             return;
         }
 
@@ -283,6 +298,10 @@ public class MainActivity extends AppCompatActivity {
                     event.getLongitude()
             );
 
+            Toast.makeText(this,
+                    event.getTitle() + " distance: " + distance,
+                    Toast.LENGTH_LONG).show();
+
             if (distance <= RADIUS_METERS) {
                 showEventNotification(event, distance);
             }
@@ -290,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-/*
+
     private void requestNotificationPermission() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -308,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-*/
+
     private void createNotificationChannel() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -328,6 +347,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showEventNotification(Event event, float distance) {
+
+        if (event.getId() == null) {
+            Toast.makeText(this, "Event ID NULL", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Toast.makeText(this, "Sending notification", Toast.LENGTH_LONG).show();
 
         if (notifiedEventIds.contains(event.getId())) {
             return;
@@ -355,7 +381,7 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(
                         this,
                         new String[]{Manifest.permission.POST_NOTIFICATIONS},
-                        1001
+                        NOTIFICATION_PERMISSION_REQUEST
                 );
                 return;
             }
@@ -363,7 +389,7 @@ public class MainActivity extends AppCompatActivity {
 
         Notification notification =
                 new NotificationCompat.Builder(this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setSmallIcon(R.drawable.baseline_doorbell_24)
                         .setContentTitle("Κοντινή Εκδήλωση")
                         .setContentText(event.getTitle() + " (" + (int) distance + "m)")
                         .setContentIntent(pendingIntent)
