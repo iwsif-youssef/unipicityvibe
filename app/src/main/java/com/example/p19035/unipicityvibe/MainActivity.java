@@ -40,7 +40,7 @@ import java.util.Set;
 
 import models.Event;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     //Authentication
     FirebaseAuth auth;
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this,
-                                "Σφάλμα φόρτωσης εκδηλώσεων",
+                                getString(R.string.error_loading_events),
                                 Toast.LENGTH_SHORT).show());
     }
 
@@ -268,10 +268,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            Toast.makeText(this, "User NULL", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,
+                    getString(R.string.user_null),
+                    Toast.LENGTH_LONG).show();
+
             return;
         } else {
-            Toast.makeText(this, "User OK", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,
+                    getString(R.string.user_ok),
+                    Toast.LENGTH_LONG).show();
+
         }
 
 
@@ -283,7 +289,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences settingsPrefs = getSharedPreferences("settings", MODE_PRIVATE);
         boolean enabled = settingsPrefs.getBoolean("notifications_enabled", true);
 
-        Toast.makeText(this, "Notifications enabled: " + enabled, Toast.LENGTH_LONG).show();
+        Toast.makeText(this,
+                getString(R.string.notifications_enabled_status, enabled),
+                Toast.LENGTH_LONG).show();
 
         if (!enabled) {
             return;
@@ -298,18 +306,12 @@ public class MainActivity extends AppCompatActivity {
                     event.getCoordinateY()
             );
 
-            Toast.makeText(this, event.getTitle() + " distance: " + distance + "m", Toast.LENGTH_LONG).show();
-
             if (distance <= RADIUS_METERS) {
-
-                Toast.makeText(this,"in IF start",Toast.LENGTH_LONG).show();
 
                 showEventNotification(
                         event.getTitle(),
                         event.getTitle() + " (" + (int) distance + "m)"
                 );
-
-                Toast.makeText(this,"in IF end",Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -336,8 +338,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            String name = "Nearby Events";
-            String description = "Notifications for nearby events";
+            String name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+
             int importance = NotificationManager.IMPORTANCE_HIGH;
 
             NotificationChannel channel =

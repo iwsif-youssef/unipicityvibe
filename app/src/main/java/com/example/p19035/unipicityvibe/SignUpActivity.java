@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
 
     EditText emailET;
     EditText passwordET;
@@ -39,17 +39,39 @@ public class SignUpActivity extends AppCompatActivity {
             String email = emailET.getText().toString();
             String pass = passwordET.getText().toString();
 
-            auth.createUserWithEmailAndPassword(email, pass)
-                    .addOnCompleteListener(task -> {
+            auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
+
                             startActivity(new Intent(this, MainActivity.class));
                             finish();
+
                         } else {
-                            Toast.makeText(this,
-                                    task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
+
+                            String message;
+
+                            if (task.getException() instanceof
+                                    com.google.firebase.auth.FirebaseAuthWeakPasswordException) {
+
+                                message = getString(R.string.error_weak_password);
+
+                            } else if (task.getException() instanceof
+                                    com.google.firebase.auth.FirebaseAuthUserCollisionException) {
+
+                                message = getString(R.string.error_email_exists);
+
+                            } else if (task.getException() instanceof
+                                    com.google.firebase.auth.FirebaseAuthInvalidCredentialsException) {
+
+                                message = getString(R.string.error_invalid_email);
+
+                            } else {
+                                message = getString(R.string.error_signup_generic);
+                            }
+
+                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                         }
-                    });
+
+            });
         });
     }
 }

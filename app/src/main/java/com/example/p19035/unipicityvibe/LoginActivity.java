@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     EditText emailET;
     EditText passwordET;
@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(this,
-                            "Login failed",
+                            getString(R.string.login_failed),
                             Toast.LENGTH_SHORT).show();
                 }
             });

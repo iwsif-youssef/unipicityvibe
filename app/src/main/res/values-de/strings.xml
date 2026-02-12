@@ -1,0 +1,70 @@
+<resources>
+
+    <string name="app_name">UnipiCityVibe</string>
+
+    <!--Main Activity-->
+    <string name="login">Anmelden</string>
+    <string name="sign_up">Registrieren</string>
+    <string name="my_bookings">Meine Buchungen</string>
+    <string name="log_out">Abmelden</string>
+    <string name="view_events">Veranstaltungen anzeigen</string>
+    <string name="settings">Einstellungen</string>
+    <string name="error_loading_events">Fehler beim Laden der Veranstaltungen</string>
+    <string name="user_null">Benutzer nicht angemeldet</string>
+    <string name="user_ok">Benutzer authentifiziert</string>
+    <string name="notifications_enabled_status">Benachrichtigungen aktiviert: %1$b</string>
+    <string name="event_distance">%1$s Entfernung: %2$.2f m</string>
+    <string name="channel_name">Veranstaltungen in der Nähe</string>
+    <string name="channel_description">Benachrichtigungen für nahegelegene Veranstaltungen</string>
+
+    <!--Login Activity-->
+    <string name="email">E-Mail</string>
+    <string name="password">Passwort</string>
+    <string name="login_failed">Anmeldung fehlgeschlagen</string>
+    <string name="sign_up_instead">Stattdessen registrieren</string>
+
+    <!--Sign Up Activity-->
+    <string name="error_weak_password">Das Passwort muss mindestens 6 Zeichen lang sein</string>
+    <string name="error_email_exists">E-Mail ist bereits registriert</string>
+    <string name="error_invalid_email">Ungültiges E-Mail-Format</string>
+    <string name="error_signup_generic">Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.</string>
+
+    <!--Settings Activity-->
+    <string name="theme">Design</string>
+    <string name="font_size">Schriftgröße</string>
+    <string name="geolocation">Standort</string>
+    <string name="switch_label">Aktivieren</string>
+    <string name="save">Speichern</string>
+    <string name="settings_saved">Einstellungen gespeichert</string>
+    <string name="light">Hell</string>
+    <string name="dark">Dunkel</string>
+    <string name="small">Klein</string>
+    <string name="medium">Mittel</string>
+    <string name="large">Groß</string>
+    <string name="english">Englisch</string>
+    <string name="greek">Griechisch</string>
+    <string name="german">Deutsch</string>
+    <string name="language">Sprache</string>
+
+    <!--Events Activity-->
+    <string name="event_error">Fehler beim Laden der Veranstaltung</string>
+
+    <!--Event Details Activity-->
+    <string name="go_to_booking">Zur Buchung</string>
+
+    <!--Book Event Activity-->
+    <string name="name">Name</string>
+    <string name="your_name">Ihr Name</string>
+    <string name="your_email">Ihre E-Mail</string>
+    <string name="book">Buchen</string>
+    <string name="empty_username_error">Bitte einen Benutzernamen eingeben</string>
+    <string name="existing_booking">Sie haben bereits ein Ticket für diese Veranstaltung</string>
+    <string name="booking_check_error">Fehler bei der Buchungsprüfung</string>
+    <string name="booking_complete">Buchung abgeschlossen</string>
+    <string name="booking_error">Buchungsfehler</string>
+
+    <!--My Bookings Activity-->
+    <string name="not_logged_in">Sie sind nicht angemeldet</string>
+    <string name="booking_load_error">Buchungen konnten nicht geladen werden</string>
+
+</resources>

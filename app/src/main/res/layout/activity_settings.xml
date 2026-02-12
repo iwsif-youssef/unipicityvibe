@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Settings"
+        android:text="@string/settings"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Email"
+        android:text="@string/email"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.002"
@@ -33,11 +33,11 @@
         app:layout_constraintTop_toBottomOf="@+id/settingsTextView" />
 
     <TextView
-        android:id="@+id/settingsThemeTextVIew"
+        android:id="@+id/settingsLanguageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Theme"
+        android:layout_marginTop="24dp"
+        android:text="@string/language"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.002"
@@ -45,11 +45,23 @@
         app:layout_constraintTop_toBottomOf="@+id/settingsEmailEditText" />
 
     <TextView
+        android:id="@+id/settingsThemeTextVIew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/theme"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.002"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsLanguageSpinner" />
+
+    <TextView
         android:id="@+id/settingsFontTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Font Size"
+        android:layout_marginTop="24dp"
+        android:text="@string/font_size"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.002"
@@ -60,11 +72,11 @@
         android:id="@+id/geolocationTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Geolocation"
+        android:layout_marginTop="24dp"
+        android:text="@string/geolocation"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.002"
+        app:layout_constraintHorizontal_bias="0.003"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsFontSpinner" />
 
@@ -73,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Switch"
+        android:text="@string/switch_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.003"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +99,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="text"
-        android:text="Email"
+        android:text="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.004"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,9 +127,20 @@
         android:id="@+id/settingsSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        android:text="Save"
-        app:layout_constraintTop_toBottomOf="@+id/settingsFontSpinner"
-        tools:layout_editor_absoluteX="161dp" />
+        android:layout_marginTop="8dp"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/geolocationSwitch" />
+
+    <Spinner
+        android:id="@+id/settingsLanguageSpinner"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsLanguageTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

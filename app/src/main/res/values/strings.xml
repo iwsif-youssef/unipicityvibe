@@ -1,3 +1,70 @@
 <resources>
+
     <string name="app_name">UnipiCityVibe</string>
+
+    <!--Main Activity-->
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="my_bookings">My Bookings</string>
+    <string name="log_out">Log Out</string>
+    <string name="view_events">View Events</string>
+    <string name="settings">Settings</string>
+    <string name="error_loading_events">Error loading events</string>
+    <string name="user_null">User not logged in</string>
+    <string name="user_ok">User authenticated</string>
+    <string name="notifications_enabled_status">Notifications enabled: %1$b</string>
+    <string name="event_distance">%1$s distance: %2$.2f m</string>
+    <string name="channel_name">Nearby Events</string>
+    <string name="channel_description">Notifications for nearby events</string>
+
+    <!--Login Activity-->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_failed">Login failed</string>
+    <string name="sign_up_instead">Sign Up Instead</string>
+
+    <!--Sign Up Activity-->
+    <string name="error_weak_password">Password must be at least 6 characters</string>
+    <string name="error_email_exists">Email already registered</string>
+    <string name="error_invalid_email">Invalid email format</string>
+    <string name="error_signup_generic">Registration failed. Please try again.</string>
+
+    <!--Settings Activity-->
+    <string name="theme">Theme</string>
+    <string name="font_size">Font Size</string>
+    <string name="geolocation">Geolocation</string>
+    <string name="switch_label">Enable</string>
+    <string name="save">Save</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
+    <string name="english">English</string>
+    <string name="greek">Greek</string>
+    <string name="german">German</string>
+    <string name="language">Language</string>
+
+    <!--Events Activity-->
+    <string name="event_error">Event Loading Error</string>
+
+    <!--Event Details Acticity-->
+    <string name="go_to_booking">Go To Booking</string>
+
+    <!--Book Event Activity-->
+    <string name="name">Name</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_email">Your Email</string>
+    <string name="book">Book</string>
+    <string name="empty_username_error">Input a username</string>
+    <string name="existing_booking">You already have a ticket for this event</string>
+    <string name="booking_check_error">Booking Check Error</string>
+    <string name="booking_complete">Booking Complete</string>
+    <string name="booking_error">Booking Error</string>
+
+    <!--My Bookings Activity-->
+    <string name="not_logged_in">You are not logged in</string>
+    <string name="booking_load_error">Couldnt Load Bookings</string>
+
 </resources>

@@ -14,10 +14,10 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
 
     EditText emailEditText;
-    Spinner themeSpinner, fontSpinner;
+    Spinner themeSpinner, fontSpinner, languageSpinner;
     Button saveButton;
     Switch geoSwitch;
 
@@ -34,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
             return insets;
         });
 
+        languageSpinner = findViewById(R.id.settingsLanguageSpinner);
         emailEditText = findViewById(R.id.settingsEmailEditText);
         themeSpinner = findViewById(R.id.settingsThemeSpinner);
         fontSpinner = findViewById(R.id.settingsFontSpinner);
@@ -85,7 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
         ArrayAdapter<String> themeAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
-                new String[]{"Light", "Dark"}
+                new String[]{getString(R.string.light), getString(R.string.dark)}
         );
         themeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         themeSpinner.setAdapter(themeAdapter);
@@ -93,13 +94,33 @@ public class SettingsActivity extends AppCompatActivity {
         ArrayAdapter<String> fontAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
-                new String[]{"Small", "Medium", "Large"}
+                new String[]{getString(R.string.small), getString(R.string.medium), getString(R.string.large)}
         );
         fontAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fontSpinner.setAdapter(fontAdapter);
+
+        ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                new String[]{getString(R.string.english), getString(R.string.greek), getString(R.string.german)}
+        );
+        languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        languageSpinner.setAdapter(languageAdapter);
     }
 
     private void loadSettings() {
+
+        String lang = settingsPrefs.getString("language", "en");
+
+        if(lang.equals("el")){
+            languageSpinner.setSelection(1);
+        }else if(lang.equals("en")){
+            languageSpinner.setSelection(0);
+        }else{
+            languageSpinner.setSelection((2));
+        }
+
+
         themeSpinner.setSelection(settingsPrefs.getInt("theme", 0));
         fontSpinner.setSelection(settingsPrefs.getInt("font", 1));
     }
@@ -113,12 +134,28 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void saveSettings() {
 
+        String selectedLang;
+
+        if(languageSpinner.getSelectedItemPosition() == 1){
+            selectedLang = "el";
+        }else if(languageSpinner.getSelectedItemPosition() == 0){
+            selectedLang = "en";
+        }else {
+            selectedLang = "de";
+        }
+
         settingsPrefs.edit()
+                .putString("language", selectedLang)
+                .apply();
+
+
+        settingsPrefs.edit()
+                .putString("language", selectedLang)
                 .putInt("theme", themeSpinner.getSelectedItemPosition())
                 .putInt("font", fontSpinner.getSelectedItemPosition())
                 .apply();
 
-        Toast.makeText(this, "Settings saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.settings_saved), Toast.LENGTH_SHORT).show();
     }
 
 

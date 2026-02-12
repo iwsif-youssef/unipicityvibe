@@ -1,0 +1,70 @@
+<resources>
+
+    <string name="app_name">UnipiCityVibe</string>
+
+    <!--Main Activity-->
+    <string name="login">Σύνδεση</string>
+    <string name="sign_up">Εγγραφή</string>
+    <string name="my_bookings">Οι Κρατήσεις μου</string>
+    <string name="log_out">Αποσύνδεση</string>
+    <string name="view_events">Προβολή Εκδηλώσεων</string>
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="error_loading_events">Σφάλμα φόρτωσης εκδηλώσεων</string>
+    <string name="user_null">Ο χρήστης δεν είναι συνδεδεμένος</string>
+    <string name="user_ok">Ο χρήστης είναι συνδεδεμένος</string>
+    <string name="notifications_enabled_status">Ειδοποιήσεις ενεργές: %1$b</string>
+    <string name="event_distance">Απόσταση %1$s: %2$.2f μέτρα</string>
+    <string name="channel_name">Κοντινές Εκδηλώσεις</string>
+    <string name="channel_description">Ειδοποιήσεις για κοντινές εκδηλώσεις</string>
+
+    <!--Login Activity-->
+    <string name="email">Email</string>
+    <string name="password">Κωδικός</string>
+    <string name="login_failed">Η σύνδεση απέτυχε</string>
+    <string name="sign_up_instead">Κάνε Εγγραφή</string>
+
+    <!--Sign Up Activity-->
+    <string name="error_weak_password">Ο κωδικός πρέπει να έχει τουλάχιστον 6 χαρακτήρες</string>
+    <string name="error_email_exists">Το email είναι ήδη καταχωρημένο</string>
+    <string name="error_invalid_email">Μη έγκυρη μορφή email</string>
+    <string name="error_signup_generic">Η εγγραφή απέτυχε. Προσπαθήστε ξανά.</string>
+
+    <!--Settings Activity-->
+    <string name="theme">Θέμα</string>
+    <string name="font_size">Μέγεθος Φόντου</string>
+    <string name="geolocation">Γεωεντοπισμός</string>
+    <string name="switch_label">Ενεργοποιημένο</string>
+    <string name="save">Αποθήκευση</string>
+    <string name="settings_saved">Οι ρυθμίσεις αποθηκεύτηκαν</string>
+    <string name="light">Φωτεινό</string>
+    <string name="dark">Σκούρο</string>
+    <string name="small">Μικρό</string>
+    <string name="medium">Μεσαίο</string>
+    <string name="large">Μεγάλο</string>
+    <string name="english">Αγγλικά</string>
+    <string name="greek">Ελληνικά</string>
+    <string name="german">Γερμανικά</string>
+    <string name="language">Γλώσσα</string>
+
+    <!--Events Activity-->
+    <string name="event_error">Σφάλμα φόρτωσης εκδήλωσης/εκδηλώσεων</string>
+
+    <!--Event Details Acticity-->
+    <string name="go_to_booking">Κράτηση Εισιτηρίου</string>
+
+    <!--Book Event Activity-->
+    <string name="name">Όνομα</string>
+    <string name="your_name">Το όνομα σου</string>
+    <string name="your_email">Το Email σου</string>
+    <string name="book">Κράτηση</string>
+    <string name="empty_username_error">Συμπλήρωσε ονοματεπώνυμο</string>
+    <string name="existing_booking">Έχεις ήδη κάνει κράτηση για αυτή την εκδήλωση</string>
+    <string name="booking_check_error">Σφάλμα ελέγχου κράτησης</string>
+    <string name="booking_complete">Η κράτηση ολοκληρώθηκε</string>
+    <string name="booking_error">Σφάλμα κράτησης</string>
+
+    <!--My Bookings Activity-->
+    <string name="not_logged_in">Δεν είσαι συνδεδεμένος</string>
+    <string name="booking_load_error">Σφάλμα φόρτωσης κρατήσεων</string>
+
+</resources>

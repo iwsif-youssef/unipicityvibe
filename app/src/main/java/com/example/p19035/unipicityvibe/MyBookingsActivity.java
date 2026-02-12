@@ -18,7 +18,7 @@ import java.util.*;
 import adapters.BookingListAdapter;
 import models.Booking;
 
-public class MyBookingsActivity extends AppCompatActivity {
+public class MyBookingsActivity extends BaseActivity {
 
     ListView listView;
     List<Booking> bookingList;
@@ -52,7 +52,7 @@ public class MyBookingsActivity extends AppCompatActivity {
     private void loadMyBookings() {
 
         if (auth.getCurrentUser() == null) {
-            Toast.makeText(this, "Δεν είσαι συνδεδεμένος", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.not_logged_in), Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -72,7 +72,7 @@ public class MyBookingsActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this,
-                                "Σφάλμα φόρτωσης κρατήσεων",
+                                getString(R.string.booking_load_error),
                                 Toast.LENGTH_LONG).show());
     }
 }

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class EventsActivity extends AppCompatActivity {
+public class EventsActivity extends BaseActivity {
 
     ListView listView;
     EventListAdapter adapter;
@@ -77,7 +77,7 @@ public class EventsActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this,
-                                "Σφάλμα φόρτωσης",
+                                getString(R.string.event_error),
                                 Toast.LENGTH_SHORT).show());
     }
 }

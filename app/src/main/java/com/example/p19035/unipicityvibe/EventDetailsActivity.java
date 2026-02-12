@@ -16,7 +16,7 @@ import models.Event;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-public class EventDetailsActivity extends AppCompatActivity {
+public class EventDetailsActivity extends BaseActivity {
 
     TextView titleTv, dateTv, priceTv, descriptionTv;
     Button bookBtn;

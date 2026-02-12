@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class BookEventActivity extends AppCompatActivity {
+public class BookEventActivity extends BaseActivity {
 
     EditText usernameEditText, emailEditText;
     Button confirmButton;
@@ -60,7 +60,7 @@ public class BookEventActivity extends AppCompatActivity {
         eventId = getIntent().getStringExtra("EVENT_ID");
 
         if (eventId == null) {
-            Toast.makeText(this, "Σφάλμα εκδήλωσης", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.event_error), Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -73,11 +73,10 @@ public class BookEventActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString().trim();
 
         if (username.isEmpty()) {
-            Toast.makeText(this, "Συμπλήρωσε ονοματεπώνυμο", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.empty_username_error), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // 🔍 ΕΛΕΓΧΟΣ ΔΙΠΛΗΣ ΚΡΑΤΗΣΗΣ
         db.collection("bookings")
                 .whereEqualTo("email", userEmail)
                 .whereEqualTo("eventId", eventId)
@@ -87,7 +86,7 @@ public class BookEventActivity extends AppCompatActivity {
                     if (!query.isEmpty()) {
 
                         Toast.makeText(this,
-                                "Έχεις ήδη κάνει κράτηση για αυτή την εκδήλωση",
+                                getString(R.string.existing_booking),
                                 Toast.LENGTH_LONG).show();
                         return;
                     }
@@ -96,7 +95,7 @@ public class BookEventActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this,
-                                "Σφάλμα ελέγχου κράτησης",
+                                getString(R.string.booking_check_error),
                                 Toast.LENGTH_LONG).show());
     }
 
@@ -112,13 +111,13 @@ public class BookEventActivity extends AppCompatActivity {
                 .add(booking)
                 .addOnSuccessListener(doc -> {
                     Toast.makeText(this,
-                            "Η κράτηση ολοκληρώθηκε!",
+                            getString(R.string.booking_complete),
                             Toast.LENGTH_LONG).show();
                     finish();
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this,
-                                "Σφάλμα κράτησης",
+                                getString(R.string.booking_error),
                                 Toast.LENGTH_LONG).show());
     }
 
