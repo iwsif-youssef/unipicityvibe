@@ -157,6 +157,7 @@ public class MainActivity extends BaseActivity {
         myBookingsButton = findViewById(R.id.mainMyBookingsButton);
         logoutButton = findViewById(R.id.mainLogoutButton);
         viewEventsButton = findViewById(R.id.mainViewEvents);
+        settingsButton = findViewById(R.id.mainSettingsButton);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -164,7 +165,7 @@ public class MainActivity extends BaseActivity {
             myBookingsButton.setVisibility(View.GONE);
             logoutButton.setVisibility(View.GONE);
             viewEventsButton.setVisibility(View.GONE);
-
+            settingsButton.setVisibility(View.GONE);
 
             loginButton.setVisibility(View.VISIBLE);
             registerButton.setVisibility(View.VISIBLE);
@@ -172,6 +173,7 @@ public class MainActivity extends BaseActivity {
             myBookingsButton.setVisibility(View.VISIBLE);
             logoutButton.setVisibility(View.VISIBLE);
             viewEventsButton.setVisibility(View.VISIBLE);
+            settingsButton.setVisibility(View.VISIBLE);
 
 
             loginButton.setVisibility(View.GONE);
