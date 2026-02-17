@@ -97,30 +97,35 @@ public class MainActivity extends BaseActivity {
         myBookingsButton = findViewById(R.id.mainMyBookingsButton);
         logoutButton = findViewById(R.id.mainLogoutButton);
 
+        //Go to Login
         loginButton = findViewById(R.id.mainLoginButton);
         loginButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         });
 
+        //Go to Registration
         registerButton = findViewById(R.id.mainRegisterButton);
         registerButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
         });
 
+        //Go to Events
         viewEventsButton = findViewById(R.id.mainViewEvents);
         viewEventsButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, EventsActivity.class);
             startActivity(intent);
         });
 
+        //See users Bookings
         Button bookingsButton = findViewById(R.id.mainMyBookingsButton);
         bookingsButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MyBookingsActivity.class);
             startActivity(intent);
         });
 
+        //Logout
         logoutButton.setOnClickListener(v -> {
 
             SharedPreferences userPrefs = getSharedPreferences("user", MODE_PRIVATE);
@@ -136,14 +141,15 @@ public class MainActivity extends BaseActivity {
             finish();
         });
 
+        //Go to Settings
         settingsButton = findViewById(R.id.mainSettingsButton);
-
         settingsButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
     }
 
+    //Refresh on Logout
     @Override
     protected void onResume() {
         super.onResume();
@@ -174,6 +180,7 @@ public class MainActivity extends BaseActivity {
     }
 
     //Geolocation Methods
+    //Request the users permission to get their location and show notifications
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
@@ -187,6 +194,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    //Get events from Database
     private void loadEvents() {
 
         db.collection("events")
@@ -217,6 +225,7 @@ public class MainActivity extends BaseActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST);
     }
 
+    //Get the users location
     private void getUserLocation() {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -242,7 +251,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-
+    //Calculate the distance between the user and the inserted event
     private float distanceInMeters(double userLat, double userLon, double eventLat, double eventLon) {
 
         Location userLocation = new Location("user");
@@ -256,8 +265,8 @@ public class MainActivity extends BaseActivity {
         return userLocation.distanceTo(eventLocation);
     }
 
+    //Check every event if they are within 200 meters and show a notification for those that are
     private void checkNearbyEvents(double userLat, double userLon) {
-
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             Toast.makeText(this,
@@ -272,11 +281,9 @@ public class MainActivity extends BaseActivity {
 
         }
 
-
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             return;
         }
-
 
         SharedPreferences settingsPrefs = getSharedPreferences("settings", MODE_PRIVATE);
         boolean enabled = settingsPrefs.getBoolean("notifications_enabled", true);
@@ -284,7 +291,6 @@ public class MainActivity extends BaseActivity {
         Toast.makeText(this,
                 getString(R.string.notifications_enabled_status, enabled),
                 Toast.LENGTH_LONG).show();
-
         if (!enabled) {
             return;
         }
@@ -350,7 +356,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-
+    //Show a notification of the event's title and its distance
     private void showEventNotification(String title, String message) {
 
         Intent intent = new Intent(this, MainActivity.class);

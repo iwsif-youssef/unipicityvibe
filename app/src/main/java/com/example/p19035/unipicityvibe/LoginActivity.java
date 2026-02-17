@@ -36,11 +36,13 @@ public class LoginActivity extends BaseActivity {
         emailET = findViewById(R.id.emailEditText2);
         passwordET = findViewById(R.id.passwordEditText2);
 
+        //On pressing Login compare Email and Password with database
         findViewById(R.id.LoginButton2).setOnClickListener(v -> {
             auth.signInWithEmailAndPassword(
                     emailET.getText().toString(),
                     passwordET.getText().toString()
             ).addOnCompleteListener(task -> {
+                //Login is succesful
                 if (task.isSuccessful()) {
 
                     SharedPreferences prefs =
@@ -53,6 +55,7 @@ public class LoginActivity extends BaseActivity {
 
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
+                //Login failed
                 } else {
                     Toast.makeText(this,
                             getString(R.string.login_failed),
@@ -61,6 +64,7 @@ public class LoginActivity extends BaseActivity {
             });
         });
 
+        //Go to signup activity
         findViewById(R.id.signUpTextView1).setOnClickListener(v ->
                 startActivity(new Intent(this, SignUpActivity.class))
         );

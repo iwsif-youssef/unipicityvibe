@@ -15,6 +15,8 @@ import models.Event;
 
 import java.util.List;
 
+
+//Insert each event and its details to the list in Events Activity as an item
 public class EventListAdapter extends ArrayAdapter<Event> {
 
     public EventListAdapter(Context context, List<Event> events) {

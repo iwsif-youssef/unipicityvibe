@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 
 import java.util.Locale;
 
+//Class to help change the language
 public class LocaleHelper {
 
     public static Context setLocale(Context context) {

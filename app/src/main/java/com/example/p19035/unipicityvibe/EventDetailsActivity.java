@@ -54,6 +54,7 @@ public class EventDetailsActivity extends BaseActivity {
 
         loadEventDetails(eventId);
 
+        //Go to booking
         bookBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, BookEventActivity.class);
             intent.putExtra("EVENT_ID", eventId);
@@ -62,6 +63,14 @@ public class EventDetailsActivity extends BaseActivity {
 
     }
 
+    /*
+    Load the:
+    -title
+    -date
+    -price
+    -description
+    of the selected event
+     */
     private void loadEventDetails(String eventId) {
 
         db.collection("events")

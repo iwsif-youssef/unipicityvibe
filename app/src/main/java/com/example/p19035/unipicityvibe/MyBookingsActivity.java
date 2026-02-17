@@ -59,6 +59,7 @@ public class MyBookingsActivity extends BaseActivity {
 
         String email = auth.getCurrentUser().getEmail();
 
+        //Get booked events from database based on the users email
         db.collection("bookings")
                 .whereEqualTo("email", email)
                 .get()

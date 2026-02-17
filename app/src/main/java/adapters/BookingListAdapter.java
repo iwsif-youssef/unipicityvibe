@@ -9,6 +9,7 @@ import java.util.*;
 
 import models.Booking;
 
+//Insert each booked event as an item in MyBookings Activity
 public class BookingListAdapter extends ArrayAdapter<Booking> {
 
     public BookingListAdapter(Context context, List<Booking> bookings) {

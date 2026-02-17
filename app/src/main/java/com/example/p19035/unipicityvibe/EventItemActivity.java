@@ -22,3 +22,6 @@ public class EventItemActivity extends AppCompatActivity {
         });
     }
 }
+
+
+//THIS IS NOT DOING ANYTHING ^^^

@@ -58,6 +58,7 @@ public class EventsActivity extends BaseActivity {
         });
     }
 
+    //Get events from database
     private void loadEvents() {
         db.collection("events")
                 .get()

@@ -40,36 +40,44 @@ public class SignUpActivity extends BaseActivity {
             String pass = passwordET.getText().toString();
 
             auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
 
-                            startActivity(new Intent(this, MainActivity.class));
-                            finish();
+                //Registration complete
+                if (task.isSuccessful()) {
 
-                        } else {
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
 
-                            String message;
+                //ERRORS
+                } else {
 
-                            if (task.getException() instanceof
-                                    com.google.firebase.auth.FirebaseAuthWeakPasswordException) {
+                    String message;
 
-                                message = getString(R.string.error_weak_password);
+                    //Password wasnt long enough
+                    if (task.getException() instanceof
+                            com.google.firebase.auth.FirebaseAuthWeakPasswordException) {
 
-                            } else if (task.getException() instanceof
-                                    com.google.firebase.auth.FirebaseAuthUserCollisionException) {
+                        message = getString(R.string.error_weak_password);
 
-                                message = getString(R.string.error_email_exists);
+                    //Email already exists
+                    } else if (task.getException() instanceof
+                            com.google.firebase.auth.FirebaseAuthUserCollisionException) {
 
-                            } else if (task.getException() instanceof
-                                    com.google.firebase.auth.FirebaseAuthInvalidCredentialsException) {
+                        message = getString(R.string.error_email_exists);
 
-                                message = getString(R.string.error_invalid_email);
+                    //Not an email
+                    } else if (task.getException() instanceof
+                            com.google.firebase.auth.FirebaseAuthInvalidCredentialsException) {
 
-                            } else {
-                                message = getString(R.string.error_signup_generic);
-                            }
+                        message = getString(R.string.error_invalid_email);
 
-                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-                        }
+                    //Registration error
+                    } else {
+                        message = getString(R.string.error_signup_generic);
+                    }
+
+                    //Show error Message
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                }
 
             });
         });

@@ -83,6 +83,7 @@ public class BookEventActivity extends BaseActivity {
                 .get()
                 .addOnSuccessListener(query -> {
 
+                    //Check if ticket exists
                     if (!query.isEmpty()) {
 
                         Toast.makeText(this,
@@ -91,6 +92,7 @@ public class BookEventActivity extends BaseActivity {
                         return;
                     }
 
+                    //Save to database
                     saveBooking(username);
                 })
                 .addOnFailureListener(e ->
@@ -102,11 +104,12 @@ public class BookEventActivity extends BaseActivity {
     private void saveBooking(String username) {
 
         Map<String, Object> booking = new HashMap<>();
-        booking.put("username", username);
-        booking.put("email", userEmail);
-        booking.put("eventId", eventId);
-        booking.put("timestamp", System.currentTimeMillis());
+        booking.put("username", username);                      //Save insertet Username
+        booking.put("email", userEmail);                        //Save user Email
+        booking.put("eventId", eventId);                        //Save selected event ID
+        booking.put("timestamp", System.currentTimeMillis());   //Save when the booking was done
 
+        //Add to database
         db.collection("bookings")
                 .add(booking)
                 .addOnSuccessListener(doc -> {
