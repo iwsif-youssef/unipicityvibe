@@ -24,7 +24,7 @@
         android:id="@+id/settingsEmailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="20dp"
         android:text="@string/email"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         android:id="@+id/settingsLanguageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:text="@string/language"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,28 +57,16 @@
         app:layout_constraintTop_toBottomOf="@+id/settingsLanguageSpinner" />
 
     <TextView
-        android:id="@+id/settingsFontTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/font_size"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.002"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsThemeSpinner" />
-
-    <TextView
         android:id="@+id/geolocationTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:text="@string/geolocation"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.003"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsFontSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsThemeSpinner" />
 
     <Switch
         android:id="@+id/geolocationSwitch"
@@ -95,7 +83,7 @@
         android:id="@+id/settingsEmailEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:enabled="false"
         android:inputType="text"
@@ -113,15 +101,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsThemeTextVIew" />
-
-    <Spinner
-        android:id="@+id/settingsFontSpinner"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsFontTextView" />
 
     <Button
         android:id="@+id/settingsSaveButton"

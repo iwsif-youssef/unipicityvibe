@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity {
 
     //Geolocation AND Notifications
     FusedLocationProviderClient fusedLocationClient;
-    private static final float RADIUS_METERS = 50000f;
+    private static final float RADIUS_METERS = 200f;
     private static final int LOCATION_PERMISSION_REQUEST = 1001;
     private static final int NOTIFICATION_PERMISSION_REQUEST = 2001;
     List<Event> eventList = new ArrayList<>();
@@ -142,9 +142,6 @@ public class MainActivity extends BaseActivity {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
-
-        //showEventNotification("TEST", "This is a test notification");
-
     }
 
     @Override
@@ -188,11 +185,6 @@ public class MainActivity extends BaseActivity {
         if (requestCode == NOTIFICATION_PERMISSION_REQUEST && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             getUserLocation();
         }
-        if (requestCode == 1001 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            getUserLocation();
-        }
-
-
     }
 
     private void loadEvents() {
@@ -376,8 +368,7 @@ public class MainActivity extends BaseActivity {
                         .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(title)
                         .setContentText(message)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(message))
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
                         .setCategory(NotificationCompat.CATEGORY_EVENT)
                         .setContentIntent(pendingIntent)

@@ -67,4 +67,8 @@
     <string name="not_logged_in">Δεν είσαι συνδεδεμένος</string>
     <string name="booking_load_error">Σφάλμα φόρτωσης κρατήσεων</string>
 
+    <!--Booking List Adapter-->
+    <string name="event_id_text">Κωδικός Εκδήλωσης</string>
+    <string name="date">Ημερομηνία</string>
+
 </resources>

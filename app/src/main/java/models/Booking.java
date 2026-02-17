@@ -9,6 +9,8 @@ public class Booking {
 
     public Booking() {}
 
+
+    //Getters
     public String getUsername() { return username; }
     public String getEmail() { return email; }
     public String getEventId() { return eventId; }

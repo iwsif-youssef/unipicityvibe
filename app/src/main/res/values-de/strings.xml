@@ -67,4 +67,8 @@
     <string name="not_logged_in">Sie sind nicht angemeldet</string>
     <string name="booking_load_error">Buchungen konnten nicht geladen werden</string>
 
+    <!--Booking List Adapter-->
+    <string name="event_id_text">Ereignis-ID</string>
+    <string name="date">Datum</string>
+
 </resources>

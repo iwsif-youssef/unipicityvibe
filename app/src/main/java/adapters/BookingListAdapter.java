@@ -28,12 +28,12 @@ public class BookingListAdapter extends ArrayAdapter<Booking> {
         TextView line1 = convertView.findViewById(android.R.id.text1);
         TextView line2 = convertView.findViewById(android.R.id.text2);
 
-        line1.setText("Event ID: " + booking.getEventId());
+        line1.setText("ID: " + booking.getEventId());
 
         String date = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
                 .format(new Date(booking.getTimestamp()));
 
-        line2.setText("Ημερομηνία: " + date);
+        line2.setText(date);
 
         return convertView;
     }

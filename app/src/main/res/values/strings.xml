@@ -67,4 +67,8 @@
     <string name="not_logged_in">You are not logged in</string>
     <string name="booking_load_error">Couldnt Load Bookings</string>
 
+    <!--Booking List Adapter-->
+    <string name="event_id_text">Event ID</string>
+    <string name="date">Date</string>
+
 </resources>

@@ -37,7 +37,7 @@ public class SettingsActivity extends BaseActivity {
         languageSpinner = findViewById(R.id.settingsLanguageSpinner);
         emailEditText = findViewById(R.id.settingsEmailEditText);
         themeSpinner = findViewById(R.id.settingsThemeSpinner);
-        fontSpinner = findViewById(R.id.settingsFontSpinner);
+        //fontSpinner = findViewById(R.id.settingsFontSpinner);
         saveButton = findViewById(R.id.settingsSaveButton);
         geoSwitch = findViewById(R.id.geolocationSwitch);
 
@@ -90,15 +90,16 @@ public class SettingsActivity extends BaseActivity {
         );
         themeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         themeSpinner.setAdapter(themeAdapter);
-
+        /*
         ArrayAdapter<String> fontAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
                 new String[]{getString(R.string.small), getString(R.string.medium), getString(R.string.large)}
         );
+
         fontAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fontSpinner.setAdapter(fontAdapter);
-
+        */
         ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -122,7 +123,7 @@ public class SettingsActivity extends BaseActivity {
 
 
         themeSpinner.setSelection(settingsPrefs.getInt("theme", 0));
-        fontSpinner.setSelection(settingsPrefs.getInt("font", 1));
+        //fontSpinner.setSelection(settingsPrefs.getInt("font", 1));
     }
 
     private void loadUserEmail() {
@@ -152,7 +153,7 @@ public class SettingsActivity extends BaseActivity {
         settingsPrefs.edit()
                 .putString("language", selectedLang)
                 .putInt("theme", themeSpinner.getSelectedItemPosition())
-                .putInt("font", fontSpinner.getSelectedItemPosition())
+                //.putInt("font", fontSpinner.getSelectedItemPosition())
                 .apply();
 
         Toast.makeText(this, getString(R.string.settings_saved), Toast.LENGTH_SHORT).show();
